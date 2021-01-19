@@ -5,7 +5,7 @@ import Produto from '../../Componentes/Produto'
 function Produtos() {
     const [produtos, setProdutos] = useState([]);
     useEffect(async () => {
-        const resposta = await fetch("http://localhost/Projeto/bd/php/produtos.php")
+        const resposta = await fetch("http://localhost:3000/Produtos")
         const dados = await resposta.json()
         console.log(dados)
 
@@ -13,12 +13,25 @@ function Produtos() {
 
     }, []);
 
-    // function exibirTodos(){
-    //     let elementos= document.getElementsByClassName("produto");
-    //     for(let i=0; i<elementos.length;i++){
-    //         elementos[i].style="display:block";
-    //     }
-    // }
+    function exibirTodos(){
+        let elementos= document.getElementsByClassName("produto");
+        for(let i=0; i<elementos.length;i++){
+            elementos[i].style="display:block";
+        }
+    }
+    function filtrar(categoria){
+
+        let elementos= document.getElementsByClassName("box-produtos");
+        console.log(elementos)
+        for(let i=0; i<elementos.length;i++){
+            console.log(elementos[i].id);
+            if(categoria==elementos[i].id)
+                elementos[i].style="display:block";
+            else
+            elementos[i].style="display:none";
+            
+        }
+    }
     
     
 
@@ -26,22 +39,22 @@ function Produtos() {
         <Container fluid>
             <Container fluid>
             <ListGroup>
-                <ListGroup.Item action onclick="exibirTodos()"  variant="danger">
+                    <ListGroup.Item action onclick={exibirTodos}  variant="danger">
                     Todos (12)
                 </ListGroup.Item>
-                <ListGroup.Item action onclick="filtrar('televisao')" variant="danger">
+                <ListGroup.Item action onclick={filtrar('televisao')} variant="danger">
                     Televisão (3)
                 </ListGroup.Item>
-                <ListGroup.Item action onclick="filtrar('celular')" variant="danger">
+                    <ListGroup.Item action onclick={filtrar('celular')} variant="danger">
                     Celular (3)
                 </ListGroup.Item>
-                <ListGroup.Item action onclick="filtrar('maquinaDeLavar')" variant="danger">
+                    <ListGroup.Item action onclick={filtrar('maquinaDeLavar')} variant="danger">
                     Máquina de lavar (1)
                 </ListGroup.Item>
-                <ListGroup.Item action onclick="filtrar('geladeira')" variant="danger">
+                <ListGroup.Item action onclick={filtrar('geladeira')} variant="danger">
                     Geladeira (3)
                 </ListGroup.Item>
-                <ListGroup.Item action onclick="filtrar('microndas')" variant="danger">
+                    <ListGroup.Item action onclick={filtrar('microndas')} variant="danger">
                     Microondas (2)
                 </ListGroup.Item>
 
